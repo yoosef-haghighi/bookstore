@@ -1,0 +1,16 @@
+{% extends '_base.html' %}
+
+{% block page_title %}{{ book.title }}ایجاد کتاب جدید {% endblock %}
+
+{% block content %}
+        <form method="post" >
+        {% csrf_token %}
+          <table>
+              {{ form.as_table }}
+          </table>
+        <button type="submit" class="btn btn-primary">ایجاد</button>
+        </form>
+    <br>
+    <a href="{% url 'book_list' %}">لیست کتاب ها</a>
+
+{% endblock %}
