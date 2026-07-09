@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+
+{% block page_title %}{{ book.title }}حذف کتاب {{ book.title }} {% endblock %}
+
+{% block content %}
+        <form method="post" >
+            {% csrf_token %}
+            <h3>آیا از حذف کتاب {{ book.title }} مطمئنید ؟</h3>
+            <br>
+            <button type="submit" class="btn btn-danger">حذف</button>
+        </form>
+{% endblock %}
