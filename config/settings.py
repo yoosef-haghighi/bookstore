@@ -123,7 +123,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Authentication settings
 AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -137,4 +136,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 # Email config
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
+# static files config
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
