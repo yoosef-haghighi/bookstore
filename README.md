@@ -22,16 +22,3 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
-
-"Access at: http://127.0.0.1:8000"
-
-### 📁 Project Structure
-bookstore/
-├── config/          # Project settings
-├── accounts/        # User management
-├── books/           # Book CRUD operations
-├── pages/           # Static pages (about, etc.)
-├── templates/       # HTML templates
-└── static/          # CSS, JS, images
-
-> توجه: این پروژه در حال توسعه است و هر روز تغییراتی در آن ایجاد می‌شود.
