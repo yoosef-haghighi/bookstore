@@ -23,9 +23,12 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 
+##
+
 Acces at : http://127.0.0.1:8000/
 
 ## 📁 Project Structure
+
 bookstore/
 ├── config/          # Project settings
 ├── accounts/        # User management
@@ -34,4 +37,7 @@ bookstore/
 ├── templates/       # HTML templates
 └── static/          # CSS, JS, images
 
-توجه: این پروژه در حال توسعه است و هر روز تغییراتی در آن ایجاد می‌شود. 
+##
+
+توجه: این پروژه در حال توسعه است و هر روز تغییراتی در آن ایجاد می‌شود.
+
