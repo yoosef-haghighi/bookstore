@@ -25,7 +25,7 @@ python manage.py runserver
 
 Acces at : http://127.0.0.1:8000/
 
-## project structure 
+## 📁 Project Structure
 bookstore/
 ├── config/          # Project settings
 ├── accounts/        # User management
