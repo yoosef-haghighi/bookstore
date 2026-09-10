@@ -4,6 +4,14 @@
 
 {% block content %}
 <div class="container" dir="rtl">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% else %}alert-info{% endif %} mt-3" role="alert" style="border-radius: var(--radius-md); font-weight: 500;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
     <div class="detail-hero animate-fade-in">
         <div class="row align-items-center">
             <div class="col-lg-4 col-md-5 mb-4 mb-md-0">
@@ -28,12 +36,14 @@
                     <small>تومان</small>
                 </div>
                 <div class="detail-actions">
-                    <a href="{% url 'book_update' book.id %}" class="detail-action-btn detail-action-edit">
-                        <i class="bi bi-pencil"></i>ویرایش
-                    </a>
-                    <a href="{% url 'book_delete' book.id %}" class="detail-action-btn detail-action-delete">
-                        <i class="bi bi-trash"></i>حذف
-                    </a>
+                    {% if user.is_authenticated and user == book.created_by %}
+                        <a href="{% url 'book_update' book.id %}" class="detail-action-btn detail-action-edit">
+                            <i class="bi bi-pencil"></i>ویرایش
+                        </a>
+                        <a href="{% url 'book_delete' book.id %}" class="detail-action-btn detail-action-delete">
+                            <i class="bi bi-trash"></i>حذف
+                        </a>
+                    {% endif %}
                     <a href="{% url 'book_list' %}" class="detail-action-btn detail-action-list">
                         <i class="bi bi-list-ul"></i>لیست کتاب‌ها
                     </a>
@@ -53,77 +63,145 @@
         <h3 class="comments-title">
             <i class="bi bi-chat-dots"></i>
             نظرات
+            <small style="font-weight: normal; color: var(--dark-soft); font-size: 0.85rem;">({{ comments|length }})</small>
         </h3>
 
-        <div class="comment-item">
-            <div class="comment-header">
-                <div class="comment-avatar">ن</div>
-                <span class="comment-name">نوشین توکلی</span>
-            </div>
-            <p class="comment-text">
-                با سلام چند تا نکته میخواستم بگم اول اینکه من جزء دسته از آدمایی بودم که میگفتم کتاب خوندن لذتش به اینه که آدم کتابو بگیره دستش و بخونه اما واقعا میگم فیدیبو تو زمینه کاری خودش داره خوب عمل میکنه امیدوارم روز به روز موفق تر بشه ممنون بابت کتابهای خوبی که میزارید.
-            </p>
-        </div>
-
-        <div class="comment-item">
-            <div class="comment-header">
-                <div class="comment-avatar">م</div>
-                <span class="comment-name">محمد رضایی</span>
-            </div>
-            <p class="comment-text">
-                کتاب بسیار خوبی بود. محتوا عالی و ترجمه روان بود. پیشنهاد می‌کنم حتماً مطالعه کنید.
-            </p>
-        </div>
-
-        <div class="comment-item">
-            <div class="comment-header">
-                <div class="comment-avatar">ع</div>
-                <span class="comment-name">علی احمدی</span>
-            </div>
-            <p class="comment-text">
-                از خریدم راضی‌ام. ارسال سریع بود و کیفیت چاپ عالی. ممنون از تیم کتاب یار.
-            </p>
+        <div id="comments-list">
+            {% for comment in comments %}
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <div class="comment-avatar">{{ comment.user.username|first }}</div>
+                        <span class="comment-name">{{ comment.user.username }}</span>
+                        <small style="color: var(--dark-soft); margin-right: auto;">{{ comment.created_at|date:'Y/m/d H:i' }}</small>
+                    </div>
+                    <p class="comment-text">{{ comment.body }}</p>
+                </div>
+            {% empty %}
+                <p style="color: var(--dark-soft); text-align: center; padding: 1.5rem 0;">هنوز نظری ثبت نشده است.</p>
+            {% endfor %}
         </div>
     </div>
 
-    <div class="comment-form-section animate-fade-in">
-        <h3 class="comment-form-title">
-            <i class="bi bi-pencil-square"></i>
-            نظر خود را بنویسید
-        </h3>
-        <form method="POST">
-            {% csrf_token %}
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label class="form-label" for="author_name" style="font-weight: 500; color: var(--dark);">
-                        <i class="bi bi-person me-1"></i>نام شما
-                    </label>
-                    <input type="text" class="form-control" style="border-radius: var(--radius-sm); padding: 10px 14px; border: 2px solid #e0e0e0; transition: var(--transition);"
-                           placeholder="نام خود را وارد کنید" name="author_name" id="author_name">
+    {% if user.is_authenticated %}
+        <div class="comment-form-section animate-fade-in">
+            <h3 class="comment-form-title">
+                <i class="bi bi-pencil-square"></i>
+                نظر خود را بنویسید
+            </h3>
+            <form id="comment-form" method="POST" data-book-url="{% url 'book_detail' book.id %}">
+                {% csrf_token %}
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label" for="comment_body" style="font-weight: 500; color: var(--dark);">
+                            <i class="bi bi-chat-left-text me-1"></i>متن نظر
+                        </label>
+                        <textarea class="form-control" name="body" rows="4" id="comment_body" required
+                                  style="border-radius: var(--radius-sm); padding: 12px 14px; border: 2px solid #e0e0e0; transition: var(--transition); resize: vertical;"
+                                  placeholder="نظر خود را اینجا بنویسید..."></textarea>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" id="comment-submit-btn" class="btn-submit" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--white); padding: 12px 36px; border-radius: 50px; font-weight: 600; border: none; font-family: 'BYekan', sans-serif; font-size: 1rem; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="bi bi-send"></i>ارسال نظر
+                        </button>
+                    </div>
+                    <div id="comment-error" class="col-12" style="display: none;">
+                        <div class="alert alert-danger" style="border-radius: var(--radius-sm); margin-bottom: 0;"></div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label class="form-label" for="email" style="font-weight: 500; color: var(--dark);">
-                        <i class="bi bi-envelope me-1"></i>ایمیل شما
-                    </label>
-                    <input type="email" class="form-control" style="border-radius: var(--radius-sm); padding: 10px 14px; border: 2px solid #e0e0e0; transition: var(--transition);"
-                           placeholder="example@gmail.com" name="email" id="email">
-                </div>
-                <div class="col-12">
-                    <label class="form-label" for="comment_text" style="font-weight: 500; color: var(--dark);">
-                        <i class="bi bi-chat-left-text me-1"></i>متن نظر
-                    </label>
-                    <textarea class="form-control" name="text" rows="4" id="comment_text"
-                              style="border-radius: var(--radius-sm); padding: 12px 14px; border: 2px solid #e0e0e0; transition: var(--transition); resize: vertical;"
-                              placeholder="نظر خود را اینجا بنویسید..."></textarea>
-                </div>
-                <div class="col-12">
-                    <button type="submit" class="btn-submit" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--white); padding: 12px 36px; border-radius: 50px; font-weight: 600; border: none; font-family: 'BYekan', sans-serif; font-size: 1rem; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;">
-                        <i class="bi bi-send"></i>ارسال نظر
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+    {% else %}
+        <div class="comment-form-section animate-fade-in" style="text-align: center;">
+            <h3 class="comment-form-title" style="justify-content: center;">
+                <i class="bi bi-pencil-square"></i>
+                نظر خود را بنویسید
+            </h3>
+            <p style="color: var(--dark-soft); margin-bottom: 1.5rem;">
+                برای ارسال نظر ابتدا باید وارد حساب کاربری خود شوید.
+            </p>
+            <a href="{% url 'login' %}" class="hero-btn hero-btn-primary" style="font-size: 1rem; padding: 12px 28px;">
+                <i class="bi bi-box-arrow-in-left me-2"></i>ورود به حساب کاربری
+            </a>
+        </div>
+    {% endif %}
 </div>
 <br>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('comment-form');
+    if (!form) return;
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const bodyField = document.getElementById('comment_body');
+        const body = bodyField.value.trim();
+        const errorDiv = document.getElementById('comment-error');
+        const submitBtn = document.getElementById('comment-submit-btn');
+
+        if (!body) {
+            errorDiv.style.display = 'block';
+            errorDiv.querySelector('.alert').textContent = 'متن نظر نمی‌تواند خالی باشد.';
+            return;
+        }
+
+        errorDiv.style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i>در حال ارسال...';
+
+        const formData = new FormData(form);
+        formData.append('body', body);
+
+        fetch(form.dataset.bookUrl, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const commentsList = document.getElementById('comments-list');
+                const noComments = commentsList.querySelector('p');
+                if (noComments) noComments.remove();
+
+                const initial = data.comment.username.charAt(0);
+                const commentHTML = `
+                    <div class="comment-item" style="animation: fadeInUp 0.4s ease-out;">
+                        <div class="comment-header">
+                            <div class="comment-avatar">${initial}</div>
+                            <span class="comment-name">${data.comment.username}</span>
+                            <small style="color: var(--dark-soft); margin-right: auto;">${data.comment.created_at}</small>
+                        </div>
+                        <p class="comment-text">${data.comment.body}</p>
+                    </div>
+                `;
+                commentsList.insertAdjacentHTML('afterbegin', commentHTML);
+                bodyField.value = '';
+
+                const titleEl = document.querySelector('.comments-title small');
+                if (titleEl) {
+                    const count = parseInt(titleEl.textContent.replace(/[()]/g, '')) + 1;
+                    titleEl.textContent = '(' + count + ')';
+                }
+            } else {
+                errorDiv.style.display = 'block';
+                errorDiv.querySelector('.alert').textContent = data.error || 'خطایی رخ داده است.';
+            }
+        })
+        .catch(() => {
+            errorDiv.style.display = 'block';
+            errorDiv.querySelector('.alert').textContent = 'خطایی در ارتباط با سرور رخ داده است.';
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="bi bi-send"></i>ارسال نظر';
+        });
+    });
+});
+</script>
 {% endblock %}
