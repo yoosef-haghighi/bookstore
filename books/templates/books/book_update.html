@@ -1,0 +1,56 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}کتاب یار | ویرایش {{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="section-spacing">
+    <div class="container" dir="rtl">
+        <div class="section-header">
+            <h2><i class="bi bi-pencil me-2" style="color: var(--primary);"></i>ویرایش کتاب</h2>
+            <div class="section-divider"></div>
+            <p>اطلاعات کتاب «{{ book.title }}» را ویرایش کنید</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-8">
+                <div class="form-card animate-fade-in">
+                    <div class="form-card-header form-card-header-primary">
+                        <i class="bi bi-pencil-square"></i>
+                        فرم ویرایش کتاب
+                    </div>
+                    <div class="form-card-body">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <div class="d-flex gap-3 mt-4">
+                                <button type="submit" class="form-card btn-submit">
+                                    <i class="bi bi-check-lg"></i>ذخیره تغییرات
+                                </button>
+                                <a href="{% url 'book_detail' book.id %}" class="detail-action-btn detail-action-list" style="text-decoration: none;">
+                                    <i class="bi bi-arrow-right"></i>بازگشت
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-guide animate-fade-in-delay">
+                    <div class="form-guide-header">
+                        <i class="bi bi-info-circle"></i>
+                        راهنما
+                    </div>
+                    <div class="form-guide-body">
+                        <p><i class="bi bi-info-circle text-primary me-1"></i>فیلدهایی که نیاز به تغییر دارند را ویرایش کنید.</p>
+                        <p><i class="bi bi-info-circle text-primary me-1"></i>تغییرات ذخیره نشده با خروج از صفحه از بین می‌روند.</p>
+                        <p><i class="bi bi-info-circle text-primary me-1"></i>برای تغییر تصویر جلد، فایل جدید انتخاب کنید.</p>
+                        <hr>
+                        <p class="mb-0"><i class="bi bi-lightbulb text-warning me-1"></i>پس از ویرایش، ذخیره را بزنید.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

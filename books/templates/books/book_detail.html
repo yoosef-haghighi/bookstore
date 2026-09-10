@@ -1,0 +1,129 @@
+{% extends '_base.html' %}
+
+{% block page_title %}کتاب یار | {{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="container" dir="rtl">
+    <div class="detail-hero animate-fade-in">
+        <div class="row align-items-center">
+            <div class="col-lg-4 col-md-5 mb-4 mb-md-0">
+                <div class="detail-cover-wrapper">
+                    {% if book.cover %}
+                        <img src="{{ book.cover.url }}" alt="{{ book.title }}">
+                    {% else %}
+                        <div style="background: linear-gradient(135deg, #f0f0f0, #e0e0e0); height: 350px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-lg);">
+                            <i class="bi bi-book" style="font-size: 5rem; color: #ccc;"></i>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7">
+                <h1 class="detail-title">{{ book.title }}</h1>
+                <div class="detail-author">
+                    <i class="bi bi-person"></i>
+                    {{ book.author }}
+                </div>
+                <div class="detail-price-badge mb-3">
+                    {{ book.price }}
+                    <small>تومان</small>
+                </div>
+                <div class="detail-actions">
+                    <a href="{% url 'book_update' book.id %}" class="detail-action-btn detail-action-edit">
+                        <i class="bi bi-pencil"></i>ویرایش
+                    </a>
+                    <a href="{% url 'book_delete' book.id %}" class="detail-action-btn detail-action-delete">
+                        <i class="bi bi-trash"></i>حذف
+                    </a>
+                    <a href="{% url 'book_list' %}" class="detail-action-btn detail-action-list">
+                        <i class="bi bi-list-ul"></i>لیست کتاب‌ها
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-description animate-fade-in">
+        <h3 style="font-weight: bold; color: var(--dark); margin-bottom: 1rem;">
+            <i class="bi bi-card-text me-2" style="color: var(--primary);"></i>درباره کتاب
+        </h3>
+        {{ book.description|linebreaks }}
+    </div>
+
+    <div class="comments-section animate-fade-in">
+        <h3 class="comments-title">
+            <i class="bi bi-chat-dots"></i>
+            نظرات
+        </h3>
+
+        <div class="comment-item">
+            <div class="comment-header">
+                <div class="comment-avatar">ن</div>
+                <span class="comment-name">نوشین توکلی</span>
+            </div>
+            <p class="comment-text">
+                با سلام چند تا نکته میخواستم بگم اول اینکه من جزء دسته از آدمایی بودم که میگفتم کتاب خوندن لذتش به اینه که آدم کتابو بگیره دستش و بخونه اما واقعا میگم فیدیبو تو زمینه کاری خودش داره خوب عمل میکنه امیدوارم روز به روز موفق تر بشه ممنون بابت کتابهای خوبی که میزارید.
+            </p>
+        </div>
+
+        <div class="comment-item">
+            <div class="comment-header">
+                <div class="comment-avatar">م</div>
+                <span class="comment-name">محمد رضایی</span>
+            </div>
+            <p class="comment-text">
+                کتاب بسیار خوبی بود. محتوا عالی و ترجمه روان بود. پیشنهاد می‌کنم حتماً مطالعه کنید.
+            </p>
+        </div>
+
+        <div class="comment-item">
+            <div class="comment-header">
+                <div class="comment-avatar">ع</div>
+                <span class="comment-name">علی احمدی</span>
+            </div>
+            <p class="comment-text">
+                از خریدم راضی‌ام. ارسال سریع بود و کیفیت چاپ عالی. ممنون از تیم کتاب یار.
+            </p>
+        </div>
+    </div>
+
+    <div class="comment-form-section animate-fade-in">
+        <h3 class="comment-form-title">
+            <i class="bi bi-pencil-square"></i>
+            نظر خود را بنویسید
+        </h3>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label" for="author_name" style="font-weight: 500; color: var(--dark);">
+                        <i class="bi bi-person me-1"></i>نام شما
+                    </label>
+                    <input type="text" class="form-control" style="border-radius: var(--radius-sm); padding: 10px 14px; border: 2px solid #e0e0e0; transition: var(--transition);"
+                           placeholder="نام خود را وارد کنید" name="author_name" id="author_name">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="email" style="font-weight: 500; color: var(--dark);">
+                        <i class="bi bi-envelope me-1"></i>ایمیل شما
+                    </label>
+                    <input type="email" class="form-control" style="border-radius: var(--radius-sm); padding: 10px 14px; border: 2px solid #e0e0e0; transition: var(--transition);"
+                           placeholder="example@gmail.com" name="email" id="email">
+                </div>
+                <div class="col-12">
+                    <label class="form-label" for="comment_text" style="font-weight: 500; color: var(--dark);">
+                        <i class="bi bi-chat-left-text me-1"></i>متن نظر
+                    </label>
+                    <textarea class="form-control" name="text" rows="4" id="comment_text"
+                              style="border-radius: var(--radius-sm); padding: 12px 14px; border: 2px solid #e0e0e0; transition: var(--transition); resize: vertical;"
+                              placeholder="نظر خود را اینجا بنویسید..."></textarea>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn-submit" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--white); padding: 12px 36px; border-radius: 50px; font-weight: 600; border: none; font-family: 'BYekan', sans-serif; font-size: 1rem; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="bi bi-send"></i>ارسال نظر
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+{% endblock %}

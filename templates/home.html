@@ -1,0 +1,109 @@
+{% extends '_base.html' %}
+
+{% block page_title %}کتاب یار | فروشگاه آنلاین کتاب{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7 hero-content animate-fade-in">
+                <h1 class="hero-title">به دنیای کتاب‌ها<br>خوش آمدید</h1>
+                <p class="hero-subtitle">
+                    کتاب یار، همراه شما در مسیر کتاب‌خوانی. بهترین کتاب‌ها را کشف کنید و تجربه‌ای متفاوت از خرید آنلاین کتاب داشته باشید.
+                </p>
+                <div class="d-flex flex-wrap">
+                    <a href="{% url 'book_list' %}" class="hero-btn hero-btn-primary">
+                        <i class="bi bi-book me-2"></i>مشاهده کتاب‌ها
+                    </a>
+                    {% if not user.is_authenticated %}
+                    <a href="{% url 'signup' %}" class="hero-btn hero-btn-secondary">
+                        <i class="bi bi-person-plus me-2"></i>عضویت رایگان
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">۱۰۰+</span>
+                        <span class="hero-stat-label">کتاب موجود</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">۵۰+</span>
+                        <span class="hero-stat-label">نویسنده</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">۱۰۰۰+</span>
+                        <span class="hero-stat-label">خواننده راضی</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 d-none d-lg-flex justify-content-center hero-image-placeholder animate-fade-in-delay">
+                <i class="bi bi-book-half"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-spacing">
+    <div class="container">
+        <div class="section-header">
+            <h2>چرا کتاب یار؟</h2>
+            <div class="section-divider"></div>
+            <p>ویژگی‌هایی که کتاب یار را متفاوت می‌کند</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card animate-fade-in">
+                <div class="feature-icon feature-icon-purple">
+                    <i class="bi bi-search"></i>
+                </div>
+                <h5 class="feature-title">جستجوی آسان</h5>
+                <p class="feature-text">به راحتی کتاب مورد علاقه خود را از بین مجموعه بزرگ کتاب‌ها پیدا کنید.</p>
+            </div>
+            <div class="feature-card animate-fade-in">
+                <div class="feature-icon feature-icon-pink">
+                    <i class="bi bi-truck"></i>
+                </div>
+                <h5 class="feature-title">ارسال سریع</h5>
+                <p class="feature-text">ارسال سریع و مطمئن کتاب‌ها به سراسر کشور با بسته‌بندی ایمن.</p>
+            </div>
+            <div class="feature-card animate-fade-in">
+                <div class="feature-icon feature-icon-green">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <h5 class="feature-title">ضمانت اصالت</h5>
+                <p class="feature-text">تمامی کتاب‌ها با تضمین اصالت و کیفیت چاپ عرضه می‌شوند.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-spacing" style="background: var(--white);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="features-grid" style="grid-template-columns: 1fr;">
+                    <div class="feature-card text-end" style="text-align: right;">
+                        <div class="d-flex align-items-center gap-3 mb-3" style="justify-content: flex-end;">
+                            <div>
+                                <h5 class="feature-title mb-0">شروع کنید</h5>
+                                <p class="feature-text mb-0">همین الان اولین کتاب خود را اضافه کنید</p>
+                            </div>
+                            <div class="feature-icon feature-icon-purple" style="margin: 0; flex-shrink: 0;">
+                                <i class="bi bi-rocket-takeoff"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <h3 style="font-weight: bold; color: var(--dark);">آماده شروع هستید؟</h3>
+                <p style="color: var(--dark-soft); margin-bottom: 1.5rem;">
+                    همین حالا وارد شوید و کتاب‌های خود را مدیریت کنید.
+                </p>
+                <a href="{% url 'book_create' %}" class="hero-btn hero-btn-primary" style="font-size: 1rem; padding: 12px 32px;">
+                    <i class="bi bi-plus-circle me-2"></i>افزودن کتاب جدید
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

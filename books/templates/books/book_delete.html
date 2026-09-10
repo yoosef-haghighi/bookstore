@@ -1,0 +1,27 @@
+{% extends '_base.html' %}
+
+{% block page_title %}کتاب یار | حذف {{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="delete-page">
+    <div class="delete-card animate-fade-in">
+        <div class="delete-icon">
+            <i class="bi bi-exclamation-triangle"></i>
+        </div>
+        <h3 class="delete-title">آیا از حذف این کتاب مطمئنید؟</h3>
+        <p class="delete-book-name" style="font-size: 1.2rem; margin-bottom: 0.5rem;">«{{ book.title }}»</p>
+        <p class="delete-subtitle">این عمل قابل بازگشت نیست و کتاب به طور کامل حذف خواهد شد.</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="delete-actions">
+                <button type="submit" class="btn-delete-confirm">
+                    <i class="bi bi-trash me-1"></i>بله، حذف شود
+                </button>
+                <a href="{% url 'book_detail' book.id %}" class="btn-delete-cancel">
+                    <i class="bi bi-x-lg me-1"></i>انصراف
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

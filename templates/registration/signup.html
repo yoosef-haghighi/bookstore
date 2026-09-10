@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}کتاب یار | ثبت نام{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-card animate-fade-in">
+        <div class="auth-icon" style="background: linear-gradient(135deg, var(--secondary), #E84393);">
+            <i class="bi bi-person-plus"></i>
+        </div>
+        <h1 class="auth-title">ایجاد حساب</h1>
+        <p class="auth-subtitle">با ثبت نام از امکانات کتاب یار بهره‌مند شوید</p>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="auth-btn auth-btn-success mt-3">
+                <i class="bi bi-check-lg me-1"></i>ثبت نام
+            </button>
+        </form>
+
+        <div class="auth-link">
+            قبلاً ثبت نام کرده‌اید؟ <a href="{% url 'login' %}">وارد شوید</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends '_base.html' %}
+
+{% block page_title %}کتاب یار | لیست کتاب‌ها{% endblock %}
+
+{% block content %}
+<div class="section-spacing">
+    <div class="container">
+        <div class="section-header">
+            <h2><i class="bi bi-book me-2" style="color: var(--primary);"></i>کتاب‌های موجود</h2>
+            <div class="section-divider"></div>
+            <p>مجموعه کتاب‌های موجود در فروشگاه را مرور کنید</p>
+        </div>
+
+        {% if books %}
+            <div class="row g-4">
+                {% for book in books %}
+                    <div class="col-xl-6 col-lg-6 col-md-12 animate-fade-in">
+                        <div class="book-card">
+                            {% if book.cover %}
+                                <img src="{{ book.cover.url }}" class="book-card-img" alt="{{ book.title }}">
+                            {% else %}
+                                <div class="book-card-img d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg, #f0f0f0, #e0e0e0); min-height: 260px;">
+                                    <i class="bi bi-book" style="font-size: 3rem; color: #ccc;"></i>
+                                </div>
+                            {% endif %}
+                            <div class="book-card-body">
+                                <a class="book-card-title" href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+                                <div class="book-card-author">
+                                    <i class="bi bi-person"></i>
+                                    {{ book.author }}
+                                </div>
+                                <p class="book-card-desc">{{ book.description|truncatewords:25 }}</p>
+                                <div class="book-card-footer">
+                                    <span class="book-card-price">
+                                        {{ book.price }}
+                                        <small>تومان</small>
+                                    </span>
+                                    <a href="{{ book.get_absolute_url }}" class="book-card-link">
+                                        مشاهده <i class="bi bi-arrow-left"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% if is_paginated %}
+                <div class="pagination-wrapper">
+                    <nav aria-label="صفحه‌بندی">
+                        <ul class="pagination mb-0">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                                        <i class="bi bi-chevron-right"></i> قبلی
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                    <li class="page-item active">
+                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                    </li>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                        بعدی <i class="bi bi-chevron-left"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="bi bi-book"></i>
+                </div>
+                <h3>هنوز کتابی اضافه نشده</h3>
+                <p>اولین کتاب خود را به فروشگاه اضافه کنید</p>
+                <a href="{% url 'book_create' %}" class="hero-btn hero-btn-primary" style="font-size: 1rem; padding: 12px 28px;">
+                    <i class="bi bi-plus-circle me-2"></i>افزودن کتاب
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

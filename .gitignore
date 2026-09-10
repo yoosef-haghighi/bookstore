@@ -1,0 +1,5 @@
+.idea/
+venv/
+*.local
+*.sqlite3
+__pycache__/

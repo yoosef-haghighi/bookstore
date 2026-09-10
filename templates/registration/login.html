@@ -1,0 +1,40 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block page_title %}کتاب یار | ورود{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-card animate-fade-in">
+        <div class="auth-icon">
+            <i class="bi bi-person-check"></i>
+        </div>
+        <h1 class="auth-title">ورود به حساب</h1>
+        <p class="auth-subtitle">خوش آمدید! وارد حساب خود شوید</p>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="auth-forgot-link">
+                <a href="{% url 'password_reset' %}">
+                    <i class="bi bi-key me-1"></i>فراموشی رمز عبور
+                </a>
+            </div>
+            <button type="submit" class="auth-btn auth-btn-success mt-3">
+                <i class="bi bi-box-arrow-in-left me-1"></i>ورود
+            </button>
+            <div class="auth-separator">
+                <span>یا</span>
+            </div>
+            <a href="{% url 'signup' %}" class="auth-btn auth-btn-primary d-block text-center text-decoration-none">
+                <i class="bi bi-person-plus me-1"></i>ایجاد حساب جدید
+            </a>
+        </form>
+
+        <div class="auth-link">
+            حساب ندارید؟ <a href="{% url 'signup' %}">ثبت نام کنید</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
