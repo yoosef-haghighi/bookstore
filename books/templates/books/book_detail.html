@@ -130,6 +130,12 @@
 
 {% block scripts %}
 <script>
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('comment-form');
     if (!form) return;
@@ -169,15 +175,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const noComments = commentsList.querySelector('p');
                 if (noComments) noComments.remove();
 
-                const initial = data.comment.username.charAt(0);
+                const initial = escapeHtml(data.comment.username.charAt(0));
                 const commentHTML = `
                     <div class="comment-item" style="animation: fadeInUp 0.4s ease-out;">
                         <div class="comment-header">
                             <div class="comment-avatar">${initial}</div>
-                            <span class="comment-name">${data.comment.username}</span>
-                            <small style="color: var(--dark-soft); margin-right: auto;">${data.comment.created_at}</small>
+                            <span class="comment-name">${escapeHtml(data.comment.username)}</span>
+                            <small style="color: var(--dark-soft); margin-right: auto;">${escapeHtml(data.comment.created_at)}</small>
                         </div>
-                        <p class="comment-text">${data.comment.body}</p>
+                        <p class="comment-text">${escapeHtml(data.comment.body)}</p>
                     </div>
                 `;
                 commentsList.insertAdjacentHTML('afterbegin', commentHTML);
