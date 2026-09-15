@@ -1,0 +1,48 @@
+{% extends '_base.html' %}
+{% load price_filters %}
+
+{% block page_title %}کتاب یار | پرداخت سفارش #{{ order.id }}{% endblock %}
+
+{% block content %}
+<div class="status-page">
+    <div class="status-card">
+        <div class="status-icon status-icon-info">
+            <i class="bi bi-credit-card"></i>
+        </div>
+        <h3 class="status-title">پرداخت آنلاین</h3>
+        <p class="status-text">
+            سفارش <strong>#{{ order.id }}</strong> ثبت شد. برای تکمیل خرید، مبلغ زیر را پرداخت کنید.
+        </p>
+
+        <div class="order-pay-amount">
+            {{ order.total_price|fa_num }}
+            <small>تومان</small>
+        </div>
+        {% if order.discount_amount %}
+            <div class="order-pay-discount">
+                تخفیف اعمال شده: {{ order.discount_amount|fa_num }} تومان
+            </div>
+        {% endif %}
+
+        <div class="d-flex gap-3 justify-content-center flex-wrap mt-4">
+            <form method="POST" action="{% url 'order_pay_confirm' order.id %}">
+                {% csrf_token %}
+                <button type="submit" class="status-btn status-btn-primary" style="border: none; cursor: pointer; font-family: 'BYekan', sans-serif;">
+                    <i class="bi bi-check-circle me-2"></i>پرداخت موفق (شبیه‌سازی)
+                </button>
+            </form>
+            <form method="POST" action="{% url 'order_pay_skip' order.id %}">
+                {% csrf_token %}
+                <button type="submit" class="status-btn" style="border: 2px solid #e0e0e0; color: var(--dark-soft); background: var(--light); cursor: pointer;">
+                    <i class="bi bi-clock me-2"></i>بعداً پرداخت می‌کنم
+                </button>
+            </form>
+        </div>
+        <div class="mt-3">
+            <small style="color: #adb5bd;">
+                <i class="bi bi-shield-lock me-1"></i>این یک درگاه آزمایشی است و از هیچ حساب واقعی برداشت نمی‌شود.
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}

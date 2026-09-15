@@ -1,0 +1,65 @@
+{% extends '_base.html' %}
+{% load price_filters %}
+
+{% block page_title %}کتاب یار | ثبت سفارش{% endblock %}
+
+{% block content %}
+<div class="section-spacing">
+    <div class="container" dir="rtl">
+        <div class="empty-state">
+            <div class="empty-state-icon">
+                <i class="bi bi-check-circle-fill" style="color: #28a745;"></i>
+            </div>
+            <h3>سفارش شما با موفقیت ثبت شد</h3>
+            <div class="order-success-card">
+                <div class="success-row">
+                    <span>شماره سفارش</span>
+                    <strong>#{{ order.id }}</strong>
+                </div>
+                <div class="success-row">
+                    <span>کد پیگیری</span>
+                    <strong style="color: var(--primary);">{{ order.tracking_code }}</strong>
+                </div>
+                <div class="success-row">
+                    <span>نحوه پرداخت</span>
+                    <strong>{{ order.get_payment_method_display }}</strong>
+                </div>
+                {% if order.discount_amount %}
+                <div class="success-row">
+                    <span>تخفیف</span>
+                    <strong style="color: var(--accent);">- {{ order.discount_amount|fa_num }} تومان</strong>
+                </div>
+                {% endif %}
+                <div class="success-row">
+                    <span>مبلغ</span>
+                    <strong>{{ order.total_price|fa_num }} تومان</strong>
+                </div>
+                <div class="success-row">
+                    <span>وضعیت</span>
+                    <span class="badge {% if order.status == 'paid' %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                        {{ order.get_status_display }}
+                    </span>
+                </div>
+            </div>
+            <p style="color: var(--dark-soft);">
+                وضعیت سفارش را با
+                <a href="{% url 'order_track' %}?tracking_code={{ order.tracking_code }}&phone={{ order.phone }}" class="text-decoration-none">کد پیگیری</a>
+                دنبال کنید.
+            </p>
+            <div class="d-flex gap-3 justify-content-center flex-wrap mt-4">
+                {% if order.status != 'paid' and order.payment_method == 'online' %}
+                    <a href="{% url 'order_pay' order.id %}" class="hero-btn hero-btn-primary" style="font-size: 1rem; padding: 12px 28px;">
+                        <i class="bi bi-credit-card me-2"></i>پرداخت آنلاین
+                    </a>
+                {% endif %}
+                <a href="{% url 'book_list' %}" class="hero-btn hero-btn-primary" style="font-size: 1rem; padding: 12px 28px;">
+                    <i class="bi bi-book me-2"></i>مشاهده کتاب‌ها
+                </a>
+                <a href="{% url 'order_detail' order.id %}" class="hero-btn hero-btn-secondary" style="font-size: 1rem; padding: 12px 28px;">
+                    <i class="bi bi-receipt me-2"></i>جزئیات سفارش
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

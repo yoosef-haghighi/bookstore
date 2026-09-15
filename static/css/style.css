@@ -646,6 +646,52 @@ body > div:not(.navbar):not(.hero-section):not(.page-footer) {
     transform: translateY(-2px);
 }
 
+.detail-action-cart {
+    background: rgba(0,201,167,0.1);
+    color: #0ea791;
+    border-color: rgba(0,201,167,0.3);
+}
+
+.detail-action-cart:hover {
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.detail-action-cart:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.detail-mini-cart {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1.5px solid rgba(0,201,167,0.35);
+    background: rgba(0,201,167,0.1);
+    color: #0ea791;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.detail-mini-cart:hover:not(:disabled) {
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.detail-mini-cart:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
 /* ===== COMMENTS ===== */
 .comments-section {
     background: var(--white);
@@ -1369,4 +1415,232 @@ body > div:not(.navbar):not(.hero-section):not(.page-footer) {
     transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
     color: var(--white);
+}
+
+/* ===== CATEGORY BADGES ===== */
+.category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+.category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    background: #ece9ff;
+    color: #5b21b6;
+    border: 2px solid #d8d3ff;
+}
+.category-badge:hover {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+.category-badge-active {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ===== MINI BOOK CARDS ===== */
+.mini-book-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 1px solid #eceff5;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.mini-book-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+.mini-cover-wrap {
+    position: relative;
+    height: 240px;
+    padding: 12px 14px;
+    background: linear-gradient(135deg, #f3f0ff, #fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.mini-cover-wrap img {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 8px 20px rgba(90, 80, 160, 0.18);
+}
+.mini-cover-placeholder {
+    font-size: 3rem;
+    color: #ccc;
+}
+.discount-badge,
+.out-of-stock-badge {
+    position: absolute;
+    z-index: 2;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 50px;
+}
+.discount-badge {
+    top: 10px;
+    right: 10px;
+    background: #ff6584;
+    color: #fff;
+}
+.out-of-stock-badge {
+    bottom: 10px;
+    left: 10px;
+    background: rgba(45, 52, 54, 0.85);
+    color: #fff;
+}
+.mini-book-body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.mini-book-title {
+    color: var(--dark);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: var(--transition);
+}
+.mini-book-title:hover {
+    color: var(--primary);
+}
+.mini-book-author {
+    color: var(--dark-soft);
+    font-size: 0.83rem;
+    margin: 6px 0 8px;
+}
+.mini-book-author i {
+    color: var(--primary-light);
+}
+.mini-book-rating {
+    color: #f5a623;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+}
+.mini-book-rating small {
+    color: var(--dark-soft);
+}
+.mini-book-price-row {
+    margin-top: auto;
+    padding-top: 10px;
+}
+.mini-price-block {
+    display: flex;
+    flex-direction: column;
+}
+.mini-old-price {
+    color: var(--dark-soft);
+    text-decoration: line-through;
+    font-size: 0.8rem;
+}
+.mini-price {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+.mini-price small {
+    font-size: 0.75rem;
+    color: var(--dark-soft);
+}
+.mini-book-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+.mini-action {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 0;
+    border-radius: var(--radius-sm);
+    border: 1px solid #eceff5;
+    background: var(--light);
+    color: var(--dark);
+    font-size: 0.9rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.mini-action:hover {
+    background: var(--white);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+.mini-action[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.mini-action.wishlist-active {
+    background: #ffeef2;
+    border-color: #ff6584;
+    color: #ff6584;
+}
+.wishlist-icon.bi-heart-fill {
+    color: #ff6584;
+}
+
+/* ===== CART COUNT BADGE ===== */
+.cart-count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    margin-inline-start: 4px;
+    border-radius: 50px;
+    background: var(--secondary);
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* ===== RATING STARS ===== */
+.rating-stars {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: 2px;
+}
+.rating-stars .star {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #ddd;
+    transition: var(--transition);
+}
+.rating-stars .star:hover,
+.rating-stars .star.active,
+.rating-stars .star.selected {
+    color: #f5a623;
+}
+.rating-stars .star:hover ~ .star {
+    color: #f5a623;
 }

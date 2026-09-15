@@ -1,0 +1,74 @@
+{% extends '_base.html' %}
+
+{% block page_title %}کتاب یار | علاقه‌مندی‌ها{% endblock %}
+
+{% block content %}
+<div class="section-spacing">
+    <div class="container" dir="rtl">
+        <div class="section-header">
+            <h2><i class="bi bi-heart me-2" style="color: #e74c3c;"></i>علاقه‌مندی‌های من</h2>
+            <div class="section-divider"></div>
+            <p>کتاب‌هایی که به لیست علاقه‌مندی خود اضافه کرده‌اید</p>
+        </div>
+
+        {% if wishlist_items %}
+            <div class="row g-4">
+                {% for item in wishlist_items %}
+                    <div class="col-xl-6 col-lg-6 col-md-12 animate-fade-in">
+                        <div class="book-card">
+                            {% if item.book.cover %}
+                                <img src="{{ item.book.cover.url }}" class="book-card-img" alt="{{ item.book.title }}">
+                            {% else %}
+                                <div class="book-card-img d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg, #f0f0f0, #e0e0e0); min-height: 260px;">
+                                    <i class="bi bi-book" style="font-size: 3rem; color: #ccc;"></i>
+                                </div>
+                            {% endif %}
+                            <div class="book-card-body">
+                                <a class="book-card-title" href="{{ item.book.get_absolute_url }}">{{ item.book.title }}</a>
+                                <div class="book-card-author">
+                                    <i class="bi bi-person"></i>
+                                    {{ item.book.author }}
+                                </div>
+                                <div class="book-card-footer">
+                                    <span class="book-card-price">
+                                        {{ item.book.price }}
+                                        <small>تومان</small>
+                                    </span>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <form method="POST" action="{% url 'cart_add' item.book.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="book-card-link" style="border: none; background: none; cursor: pointer; color: var(--primary);">
+                                                <i class="bi bi-cart-plus me-1"></i>افزودن به سبد
+                                            </button>
+                                        </form>
+                                        <form method="POST" action="{% url 'wishlist_toggle' item.book.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="text-danger" style="border: none; background: none; cursor: pointer;">
+                                                <i class="bi bi-heart-fill"></i>
+                                            </button>
+                                        </form>
+                                        <a href="{{ item.book.get_absolute_url }}" class="book-card-link">
+                                            مشاهده <i class="bi bi-arrow-left"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="bi bi-heart"></i>
+                </div>
+                <h3>لیست علاقه‌مندی‌های شما خالی است</h3>
+                <p>کتاب‌های مورد علاقه را با دکمه قلب به این لیست اضافه کنید</p>
+                <a href="{% url 'book_list' %}" class="hero-btn hero-btn-primary" style="font-size: 1rem; padding: 12px 28px;">
+                    <i class="bi bi-book me-2"></i>مشاهده کتاب‌ها
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

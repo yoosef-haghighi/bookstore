@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <defs>
+    <linearGradient id="bg27" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0" stop-color="#312e81"/>
+      <stop offset="1" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <radialGradient id="sun27" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fde68a"/>
+      <stop offset="1" stop-color="#d97706"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="900" fill="url(#bg27)"/>
+  <circle cx="300" cy="300" r="240" fill="#ffffff" opacity="0.04"/>
+  <line x1="300" y1="300" x2="430" y2="300" stroke="#fcd34d" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/><line x1="300" y1="300" x2="413" y2="365" stroke="#fcd34d" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/><line x1="300" y1="300" x2="365" y2="413" stroke="#fcd34d" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/><line x1="300" y1="300" x2="300" y2="430" stroke="#fcd34d" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/><line x1="300" y1="300" x2="235" y2="413" stroke="#fcd34d" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/><line x1="300" y1="300" x2="187" y2="365" stroke="#fcd34d" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/><line x1="300" y1="300" x2="170" y2="300" stroke="#fcd34d" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/><line x1="300" y1="300" x2="187" y2="235" stroke="#fcd34d" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/><line x1="300" y1="300" x2="235" y2="187" stroke="#fcd34d" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/><line x1="300" y1="300" x2="300" y2="170" stroke="#fcd34d" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/><line x1="300" y1="300" x2="365" y2="187" stroke="#fcd34d" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/><line x1="300" y1="300" x2="413" y2="235" stroke="#fcd34d" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="300" cy="300" r="58" fill="url(#sun27)"/>
+  <circle cx="300" cy="300" r="74" fill="none" stroke="#fcd34d" stroke-opacity="0.35" stroke-width="2"/>
+  
+  <text x="300" y="140" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="28" fill="#ffffff" fill-opacity="0.95" font-weight="bold">کتابفروشی آنلاین</text>
+  <text x="300" y="176" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="19" fill="#ffffff" fill-opacity="0.75">پرفروش‌ترین‌ها</text>
+  <rect x="255" y="196" width="90" height="4" rx="2" fill="#ffffff" opacity="0.55"/>
+  <g text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-weight="bold"><text font-size="42" fill="#000000" fill-opacity="0.22"><tspan x="302" y="336">شمس تبریزی در کنار دیوان شمس</tspan></text><text font-size="42" fill="#fde68a"><tspan x="300" y="334">شمس تبریزی در کنار</tspan><tspan x="300" y="384">دیوان شمس</tspan></text></g>
+  <text x="300" y="648" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="28" fill="#ffffff" fill-opacity="0.92">نوشتهٔ مولانا جلال‌الدین بلخی</text>
+  <g transform="translate(300, 800)">
+    <rect x="-85" y="-26" width="170" height="52" rx="26" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2"/>
+    <text x="0" y="6" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="23" fill="#fde68a">شعر</text>
+  </g>
+</svg>

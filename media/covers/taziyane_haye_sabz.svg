@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <defs>
+    <linearGradient id="bg26" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#15803d"/>
+      <stop offset="0.55" stop-color="#14532d"/>
+      <stop offset="1" stop-color="#052e16"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="900" fill="url(#bg26)"/>
+  <circle cx="505" cy="700" r="210" fill="#ffffff" opacity="0.05"/>
+  <circle cx="90" cy="180" r="120" fill="#ffffff" opacity="0.05"/>
+  <path d="M140 230 C 126 360 154 470 140 610" stroke="#4ade80" fill="none" stroke-width="5" stroke-linecap="round" opacity="0.35"/><path d="M215 230 C 201 360 229 470 215 610" stroke="#86efac" fill="none" stroke-width="3" stroke-linecap="round" opacity="0.35"/><path d="M370 230 C 356 360 384 470 370 610" stroke="#bbf7d0" fill="none" stroke-width="4" stroke-linecap="round" opacity="0.35"/><path d="M455 230 C 441 360 469 470 455 610" stroke="#4ade80" fill="none" stroke-width="5" stroke-linecap="round" opacity="0.35"/><path d="M505 230 C 491 360 519 470 505 610" stroke="#bbf7d0" fill="none" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
+  
+  <text x="300" y="140" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="28" fill="#ffffff" fill-opacity="0.95" font-weight="bold">کتابفروشی آنلاین</text>
+  <text x="300" y="176" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="19" fill="#ffffff" fill-opacity="0.75">پرفروش‌ترین‌ها</text>
+  <rect x="255" y="196" width="90" height="4" rx="2" fill="#ffffff" opacity="0.55"/>
+  <g text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-weight="bold"><text font-size="52" fill="#000000" fill-opacity="0.22"><tspan x="302" y="402">تازیانه‌های سبز</tspan></text><text font-size="52" fill="#ffffff"><tspan x="300" y="400">تازیانه‌های سبز</tspan></text></g>
+  <text x="300" y="655" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="28" fill="#ffffff" fill-opacity="0.92">نوشتهٔ فروغ فرخزاد</text>
+  <g transform="translate(300, 800)">
+    <rect x="-85" y="-26" width="170" height="52" rx="26" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2"/>
+    <text x="0" y="6" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="23" fill="#ffffff">شعر</text>
+  </g>
+</svg>

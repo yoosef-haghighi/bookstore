@@ -11,36 +11,28 @@
             <p>مجموعه کتاب‌های موجود در فروشگاه را مرور کنید</p>
         </div>
 
+        {% if categories %}
+        <div class="category-filter">
+            <a href="{% url 'book_list' %}"
+               class="category-badge {% if not selected_category %}category-badge-active{% endif %}"
+               style="background:#ece9ff; color:#5b21b6; border:2px solid #d8d3ff;">
+                همه
+            </a>
+            {% for cat in categories %}
+                <a href="{% url 'book_list' %}?category={{ cat.slug }}"
+                   class="category-badge {% if selected_category == cat.slug %}category-badge-active{% endif %}"
+                   style="background:#ece9ff; color:#5b21b6; border:2px solid #d8d3ff;">
+                    {{ cat.name }}
+                </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
         {% if books %}
             <div class="row g-4">
                 {% for book in books %}
-                    <div class="col-xl-6 col-lg-6 col-md-12 animate-fade-in">
-                        <div class="book-card">
-                            {% if book.cover %}
-                                <img src="{{ book.cover.url }}" class="book-card-img" alt="{{ book.title }}">
-                            {% else %}
-                                <div class="book-card-img d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg, #f0f0f0, #e0e0e0); min-height: 260px;">
-                                    <i class="bi bi-book" style="font-size: 3rem; color: #ccc;"></i>
-                                </div>
-                            {% endif %}
-                            <div class="book-card-body">
-                                <a class="book-card-title" href="{{ book.get_absolute_url }}">{{ book.title }}</a>
-                                <div class="book-card-author">
-                                    <i class="bi bi-person"></i>
-                                    {{ book.author }}
-                                </div>
-                                <p class="book-card-desc">{{ book.description|truncatewords:25 }}</p>
-                                <div class="book-card-footer">
-                                    <span class="book-card-price">
-                                        {{ book.price }}
-                                        <small>تومان</small>
-                                    </span>
-                                    <a href="{{ book.get_absolute_url }}" class="book-card-link">
-                                        مشاهده <i class="bi bi-arrow-left"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-lg-4 col-md-6 animate-fade-in">
+                        {% include 'books/_book_card.html' %}
                     </div>
                 {% endfor %}
             </div>
@@ -51,7 +43,8 @@
                         <ul class="pagination mb-0">
                             {% if page_obj.has_previous %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                                    <a class="page-link"
+                                       href="?page={{ page_obj.previous_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}">
                                         <i class="bi bi-chevron-right"></i> قبلی
                                     </a>
                                 </li>
@@ -60,18 +53,21 @@
                             {% for num in page_obj.paginator.page_range %}
                                 {% if page_obj.number == num %}
                                     <li class="page-item active">
-                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                        <a class="page-link"
+                                           href="?page={{ num }}{% if selected_category %}&category={{ selected_category }}{% endif %}">{{ num }}</a>
                                     </li>
                                 {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                        <a class="page-link"
+                                           href="?page={{ num }}{% if selected_category %}&category={{ selected_category }}{% endif %}">{{ num }}</a>
                                     </li>
                                 {% endif %}
                             {% endfor %}
 
                             {% if page_obj.has_next %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                    <a class="page-link"
+                                       href="?page={{ page_obj.next_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}">
                                         بعدی <i class="bi bi-chevron-left"></i>
                                     </a>
                                 </li>

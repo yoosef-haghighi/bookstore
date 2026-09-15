@@ -31,6 +31,38 @@
                     <i class="bi bi-person"></i>
                     {{ book.author }}
                 </div>
+                <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
+                    <div class="detail-rating">
+                        <span style="color: var(--dark-soft); margin-inline-end: 8px;">امتیاز:</span>
+                        <span class="rating-stars" id="rating-stars" data-book-url="{% url 'book_rate' book.id %}">
+                            {% for v in "54321" %}
+                            <i class="bi bi-star-fill star {% if user_rating and v|add:0 <= user_rating.value %}selected{% endif %}" data-value="{{ v }}"></i>
+                            {% endfor %}
+                        </span>
+                        <small class="ms-2" id="rating-info" style="color: var(--dark-soft);">
+                            {% if book.rating_count %}{{ book.average_rating }} امتیاز ({{ book.rating_count }}){% else %}بدون امتیاز{% endif %}
+                        </small>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <button type="button" id="wishlist-toggle"
+                            data-href="{% url 'wishlist_toggle' book.id %}"
+                            class="detail-action-btn {% if book in wishlist_books %}wishlist-active{% endif %}"
+                            style="border: none; cursor: pointer;">
+                        <i class="bi {% if book in wishlist_books %}bi-heart-fill{% else %}bi-heart{% endif %}"></i>
+                        <span>علاقه‌مندی</span>
+                    </button>
+                    {% endif %}
+                    <form method="POST" action="{% url 'cart_add' book.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="detail-mini-cart"
+                                title="افزودن به سبد خرید"
+                                {% if not book.is_in_stock %}disabled{% endif %}>
+                            <i class="bi {% if book.is_in_stock %}bi-cart-plus{% else %}bi-cart-x{% endif %}"></i>
+                            <span>{% if book.is_in_stock %}افزودن به سبد{% else %}ناموجود{% endif %}</span>
+                        </button>
+                    </form>
+                </div>
                 <div class="detail-price-badge mb-3">
                     {{ book.price }}
                     <small>تومان</small>
@@ -208,6 +240,69 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.innerHTML = '<i class="bi bi-send"></i>ارسال نظر';
         });
     });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const csrf = document.querySelector('meta[name="csrf-token"]');
+    const token = csrf ? csrf.content : '';
+
+    const stars = document.getElementById('rating-stars');
+    if (stars) {
+        stars.querySelectorAll('.star').forEach(function(star) {
+            star.addEventListener('click', function() {
+                if (!{{ user.is_authenticated|yesno:"true,false" }}) {
+                    alert('برای امتیازدهی ابتدا وارد شوید.');
+                    return;
+                }
+                const value = star.dataset.value;
+                fetch(stars.dataset.bookUrl, {
+                    method: 'POST',
+                    body: new URLSearchParams({ value: value }),
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': token,
+                    }
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        stars.querySelectorAll('.star').forEach(function(s) {
+                            s.classList.toggle('selected', parseInt(s.dataset.value) <= data.average);
+                        });
+                        const info = document.getElementById('rating-info');
+                        if (info) info.textContent = data.average + ' امتیاز (' + data.count + ')';
+                    } else {
+                        alert(data.error || 'خطایی رخ داده است.');
+                    }
+                });
+            });
+        });
+    }
+
+    const wishBtn = document.getElementById('wishlist-toggle');
+    if (wishBtn) {
+        wishBtn.addEventListener('click', function() {
+            fetch(wishBtn.dataset.href || '', {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': token,
+                }
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    wishBtn.classList.toggle('wishlist-active', data.added);
+                    const icon = wishBtn.querySelector('i.bi-heart, i.bi-heart-fill');
+                    if (icon) {
+                        icon.classList.toggle('bi-heart-fill', data.added);
+                        icon.classList.toggle('bi-heart', !data.added);
+                    }
+                }
+            });
+        });
+    }
 });
 </script>
 {% endblock %}

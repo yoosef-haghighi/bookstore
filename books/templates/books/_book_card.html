@@ -1,0 +1,49 @@
+{% load price_filters %}
+<div class="mini-book-card">
+    <div class="mini-cover-wrap">
+        {% if book.cover %}
+            <img src="{{ book.cover.url }}" alt="{{ book.title }}">
+        {% else %}
+            <div class="mini-cover-placeholder"><i class="bi bi-book"></i></div>
+        {% endif %}
+        {% if book.has_discount %}
+            <span class="discount-badge">{{ book.discount_percent|fa_num }}٪ تخفیف</span>
+        {% endif %}
+        {% if not book.is_in_stock %}
+            <span class="out-of-stock-badge">ناموجود</span>
+        {% endif %}
+    </div>
+    <div class="mini-book-body">
+        <a class="mini-book-title" href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+        <div class="mini-book-author"><i class="bi bi-person"></i> {{ book.author }}</div>
+        {% if book.rating_count %}
+            <div class="mini-book-rating">
+                <i class="bi bi-star-fill"></i> {{ book.average_rating }}
+                <small>({{ book.rating_count }})</small>
+            </div>
+        {% endif %}
+        <div class="mini-book-price-row">
+            {% if book.has_discount %}
+                <div class="mini-price-block">
+                    <span class="mini-old-price">{{ book.old_price|fa_num }}</span>
+                    <span class="mini-price">{{ book.price|fa_num }} <small>تومان</small></span>
+                </div>
+            {% else %}
+                <span class="mini-price">{{ book.price|fa_num }} <small>تومان</small></span>
+            {% endif %}
+        </div>
+        <div class="mini-book-actions">
+            <button class="mini-action js-cart-add" data-href="{% url 'cart_add' book.id %}"
+                    title="افزودن به سبد" {% if not book.is_in_stock %}disabled{% endif %}>
+                <i class="bi bi-cart-plus"></i>
+            </button>
+            {% if user.is_authenticated %}
+            <button class="mini-action js-wishlist {% if book in wishlist_books %}wishlist-active{% endif %}"
+                    data-href="{% url 'wishlist_toggle' book.id %}" title="علاقه‌مندی">
+                <i class="wishlist-icon bi {% if book in wishlist_books %}bi-heart-fill{% else %}bi-heart{% endif %}"></i>
+            </button>
+            {% endif %}
+            <a class="mini-action" href="{{ book.get_absolute_url }}" title="مشاهده"><i class="bi bi-eye"></i></a>
+        </div>
+    </div>
+</div>

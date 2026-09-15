@@ -10,7 +10,8 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=4">
+    <meta name="csrf-token" content="{{ csrf_token }}">
     {% block styles %}{% endblock %}
 
     <title>{% block page_title %}کتاب یار{% endblock %}</title>
@@ -37,10 +38,21 @@
                    href="{% url 'book_list' %}">
                     <i class="bi bi-book me-1"></i>کتاب‌ها
                 </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'cart_detail' %}active{% endif %}"
+                   href="{% url 'cart_detail' %}">
+                    <i class="bi bi-cart3 me-1"></i>سبد خرید
+                    {% if cart|length %}
+                    <span class="cart-count-badge">{{ cart|length }}</span>
+                    {% endif %}
+                </a>
                 {% if user.is_authenticated %}
                 <a class="nav-link {% if request.resolver_match.url_name == 'book_create' %}active{% endif %}"
                    href="{% url 'book_create' %}">
                     <i class="bi bi-plus-circle me-1"></i>افزودن کتاب
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'wishlist' %}active{% endif %}"
+                   href="{% url 'wishlist' %}">
+                    <i class="bi bi-heart me-1"></i>علاقه‌مندی
                 </a>
                 {% endif %}
             </div>
@@ -113,6 +125,57 @@
         btn.addEventListener('click', function(e) {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = document.querySelector('meta[name="csrf-token"]');
+        const csrf = token ? token.content : '';
+
+        document.querySelectorAll('.js-cart-add').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const formData = new FormData();
+                formData.append('quantity', '1');
+                fetch(btn.dataset.href, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': csrf,
+                    }
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        const badge = document.querySelector('.cart-count-badge');
+                        if (badge) badge.textContent = data.cart_count;
+                    }
+                });
+            });
+        });
+
+        document.querySelectorAll('.js-wishlist').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                fetch(btn.dataset.href, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': csrf,
+                    }
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        btn.classList.toggle('wishlist-active', data.added);
+                        const icon = btn.querySelector('.wishlist-icon');
+                        if (icon) {
+                            icon.classList.toggle('bi-heart-fill', data.added);
+                            icon.classList.toggle('bi-heart', !data.added);
+                        }
+                    }
+                });
+            });
         });
     });
 </script>

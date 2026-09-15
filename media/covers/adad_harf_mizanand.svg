@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <defs>
+    <linearGradient id="bg30" x1="0" y1="0" x2="0.55" y2="1">
+      <stop offset="0" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#042f2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="900" fill="url(#bg30)"/>
+  <circle cx="500" cy="140" r="170" fill="#ffffff" opacity="0.05"/>
+  <circle cx="80" cy="780" r="190" fill="#ffffff" opacity="0.05"/>
+  <text x="95" y="240" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="44" font-weight="bold" fill="#ffffff" opacity="0.13">3</text><text x="500" y="260" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="34" font-weight="bold" fill="#ffffff" opacity="0.13">7</text><text x="120" y="600" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="60" font-weight="bold" fill="#ffffff" opacity="0.13">42</text><text x="500" y="560" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="30" font-weight="bold" fill="#ffffff" opacity="0.13">0.5</text><text x="470" y="470" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="40" font-weight="bold" fill="#ffffff" opacity="0.13">؟</text><text x="125" y="470" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="36" font-weight="bold" fill="#ffffff" opacity="0.13">9</text><text x="530" y="380" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="44" font-weight="bold" fill="#ffffff" opacity="0.13">∞</text><text x="70" y="700" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="40" font-weight="bold" fill="#ffffff" opacity="0.13">π</text>
+  
+  <text x="300" y="140" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="28" fill="#ffffff" fill-opacity="0.95" font-weight="bold">کتابفروشی آنلاین</text>
+  <text x="300" y="176" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="19" fill="#ffffff" fill-opacity="0.75">پرفروش‌ترین‌ها</text>
+  <rect x="255" y="196" width="90" height="4" rx="2" fill="#ffffff" opacity="0.55"/>
+  <g text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-weight="bold"><text font-size="52" fill="#000000" fill-opacity="0.22"><tspan x="302" y="370">اعداد حرف می‌زنند</tspan></text><text font-size="52" fill="#ffffff"><tspan x="300" y="368">اعداد حرف</tspan><tspan x="300" y="430">می‌زنند</tspan></text></g>
+  <text x="300" y="655" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="28" fill="#ffffff" fill-opacity="0.92">نوشتهٔ ناتانیل پاپ</text>
+  <g transform="translate(300, 800)">
+    <rect x="-85" y="-26" width="170" height="52" rx="26" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2"/>
+    <text x="0" y="6" text-anchor="middle" font-family="'Vazirmatn','IRANSansX',Tahoma,'Segoe UI',sans-serif" font-size="23" fill="#ccfbf1">روانشناسی و فلسفه</text>
+  </g>
+</svg>

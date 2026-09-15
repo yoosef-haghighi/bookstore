@@ -1,0 +1,81 @@
+{% extends '_base.html' %}
+
+{% block page_title %}کتاب یار | جزئیات سفارش #{{ order.id }}{% endblock %}
+
+{% block content %}
+<div class="section-spacing">
+    <div class="container" dir="rtl">
+        <div class="section-header">
+            <h2><i class="bi bi-receipt me-2" style="color: var(--primary);"></i>سفارش #{{ order.id }}</h2>
+            <div class="section-divider"></div>
+            <p>ثبت شده در {{ order.created_at|date:'Y/m/d H:i' }}</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-8">
+                <div class="form-card animate-fade-in">
+                    <div class="form-card-header">
+                        <i class="bi bi-cart3"></i>
+                        اقلام سفارش
+                    </div>
+                    <div class="form-card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>کتاب</th>
+                                        <th>تعداد</th>
+                                        <th>قیمت واحد</th>
+                                        <th>جمع</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in order.items.all %}
+                                        <tr>
+                                            <td>
+                                                {% if item.book %}
+                                                    <a href="{{ item.book.get_absolute_url }}" class="text-decoration-none" style="color: var(--dark);">{{ item.book.title }}</a>
+                                                {% else %}
+                                                    کتاب حذف شده
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ item.quantity }}</td>
+                                            <td>{{ item.price }} <small>تومان</small></td>
+                                            <td style="font-weight: 600;">{{ item.get_cost }} <small>تومان</small></td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-start" style="font-weight: 700;">جمع کل</td>
+                                        <td style="font-weight: 800; color: var(--primary);">{{ order.total_price }} <small>تومان</small></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-card animate-fade-in-delay">
+                    <div class="form-card-header form-card-header-primary">
+                        <i class="bi bi-truck"></i>
+                        اطلاعات ارسال
+                    </div>
+                    <div class="form-card-body">
+                        <p class="mb-1"><strong>{{ order.first_name }} {{ order.last_name }}</strong></p>
+                        <p class="mb-1" style="color: var(--dark-soft);"><i class="bi bi-telephone me-1"></i>{{ order.phone }}</p>
+                        <p class="mb-3" style="color: var(--dark-soft);"><i class="bi bi-geo-alt me-1"></i>{{ order.address }}</p>
+                        <span class="badge {% if order.status == 'pending' %}bg-warning text-dark{% elif order.status == 'paid' %}bg-info text-dark{% elif order.status == 'shipped' %}bg-primary{% elif order.status == 'delivered' %}bg-success{% else %}bg-danger{% endif %}" style="font-size: 0.95rem;">
+                            وضعیت: {{ order.get_status_display }}
+                        </span>
+                    </div>
+                </div>
+                <a href="{% url 'order_list' %}" class="detail-action-btn detail-action-list mt-3" style="text-decoration: none; display: inline-block;">
+                    <i class="bi bi-arrow-right me-1"></i>بازگشت به سفارش‌ها
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
