@@ -8,7 +8,7 @@ class HomePageTest(TestCase):
 
     def test_home_page_content(self):
         response = self.client.get(reverse('home'))
-        self.assertContains(response, 'کتاب یار')
+        self.assertContains(response, 'Ybook')
 
     def test_home_page_url(self):
         response = self.client.get('/')
