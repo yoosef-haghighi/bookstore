@@ -1,12 +1,3 @@
-<img width="1366" height="768" alt="Screenshot (22)" src="https://github.com/user-attachments/assets/76ac4e21-188d-4cb7-b3ce-b7ec55079f1d" />
-<img width="1366" height="768" alt="Screenshot (21)" src="https://github.com/user-attachments/assets/aeeb9edb-ce68-40c8-bf28-9d0115d28478" />
-<img width="1366" height="768" alt="Screenshot (20)" src="https://github.com/user-attachments/assets/7174ee16-1810-4f32-9f6b-cb9d7d1ca3ce" />
-<img width="1366" height="768" alt="Screenshot (19)" src="https://github.com/user-attachments/assets/eca94465-74a3-4d15-b1cb-a8a4895064ec" />
-<img width="1366" height="768" alt="Screenshot (18)" src="https://github.com/user-attachments/assets/d20d3175-00e0-4112-89d9-f5c37dc7e5c0" />
-<img width="1366" height="768" alt="Screenshot (17)" src="https://github.com/user-attachments/assets/5826ea85-23b3-462e-9ab9-dfc0b091b05a" />
-<img width="1366" height="768" alt="Screenshot (16)" src="https://github.com/user-attachments/assets/aaf51bc0-fb6b-4246-a265-9745ae878ca0" />
-<img width="1366" height="768" alt="Screenshot (15)" src="https://github.com/user-attachments/assets/1cb1bc94-83b1-4131-b07b-99acc9a05d08" />
-<img width="1366" height="768" alt="Screenshot (14)" src="https://github.com/user-attachments/assets/814b23e2-7d01-4c82-9f05-213d2618290d" />
 
 # 📚 Bookstore
 
@@ -46,7 +37,18 @@ bookstore/
 ├── pages/           # Static pages (about, etc.)
 ├── templates/       # HTML templates
 └── static/          # CSS, JS, images
+
 ```
+<img width="1357" height="685" alt="Screenshot (22)" src="https://github.com/user-attachments/assets/4379d75c-173c-41da-84ca-f1e66f10d6c2" />
+<img width="1362" height="689" alt="Screenshot (21)" src="https://github.com/user-attachments/assets/b0ee6869-8ed1-42a9-8c4e-c8e40aaa4cac" />
+<img width="1362" height="681" alt="Screenshot (20)" src="https://github.com/user-attachments/assets/521acf6d-c7e9-42cd-85c1-d196af2f7129" />
+<img width="1362" height="623" alt="Screenshot (19)" src="https://github.com/user-attachments/assets/6cf825ca-4cd5-45a0-bd7e-b9197c507335" />
+<img width="1366" height="685" alt="Screenshot (18)" src="https://github.com/user-attachments/assets/92cc463f-634d-42e9-8e6b-a3abd7cc74ca" />
+<img width="1364" height="685" alt="Screenshot (17)" src="https://github.com/user-attachments/assets/735eec8c-0b96-4d48-94a7-a831f485a094" />
+<img width="1359" height="687" alt="Screenshot (16)" src="https://github.com/user-attachments/assets/c7e477b5-eebb-4c48-b770-03c649e4d5e0" />
+<img width="1358" height="677" alt="Screenshot (15)" src="https://github.com/user-attachments/assets/8d59e848-6f53-445b-96f6-3161cf9bf550" />
+<img width="1370" height="726" alt="Screenshot (14)" src="https://github.com/user-attachments/assets/36747852-15f0-4066-8b7c-82628913c36d" />
+
 
 توجه: این پروژه در حال توسعه است و هر روز تغییراتی در آن ایجاد می‌شود.
 
