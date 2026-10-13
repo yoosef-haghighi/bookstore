@@ -28,13 +28,19 @@ Explore the application's interface below.
 
 ### Homepage
 
-![Bookstore Homepage](https://github.com/user-attachments/assets/4379d75c-173c-41da-84ca-f1e66f10d6c2)
+<img width="1370" height="726" alt="Screenshot (14)" src="https://github.com/user-attachments/assets/28cc2628-ccac-4387-a836-85dc1df16e85" />
 
 ### Book Catalog and Details
 
-![Bookstore Screenshot](https://github.com/user-attachments/assets/b0ee6869-8ed1-42a9-8c4e-c8e40aaa4cac)
+<img width="1359" height="687" alt="Screenshot (16)" src="https://github.com/user-attachments/assets/710fabe7-a723-4aa8-823e-48e5d7231bca" />
+
 
 ### Additional Application Views
+
+<img width="1362" height="623" alt="Screenshot (19)" src="https://github.com/user-attachments/assets/0374e06e-fa2e-4f20-a066-c2d9ad661278" />
+
+<img width="1366" height="685" alt="Screenshot (18)" src="https://github.com/user-attachments/assets/0d8560d0-ba46-4ff0-807d-6afb85c029c3" />
+
 
 ![Bookstore Screenshot](https://github.com/user-attachments/assets/521acf6d-c7e9-42cd-85c1-d196af2f7129)
 
